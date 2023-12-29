@@ -1,0 +1,14 @@
+create table blood_inv(
+  bloodunits_ID number(7)CONSTRAINT bloodinv_pk PRIMARY KEY,
+  blood_type varchar2(3)NOT NULL,
+  location varchar2(20),
+  expiration_date date NOT NULL,
+  patient_id number(7)CONSTRAINT FK_PID REFERENCES Donor(Donor_ID) ON delete set NULL,
+  staff_id number(7) CONSTRAINT FK_SID REFERENCES Staff(staff_id) ON delete set NULL,
+  blood_units number(3)
+   );
+  insert into blood_inv values(167,'A','Amman',TO_DATE('2024-06-04','YYYY-MM-DD'),222,14,120);
+  insert into blood_inv values(177,'A+','Aqaba',TO_DATE('2023-09-06','YYYY-MM-DD'),155,13,100);
+  insert into blood_inv values(388,'O','Amman',TO_DATE('2024-01-06','YYYY-MM-DD'),455,15,70);
+  insert into blood_inv values(189,'AB','Ajloun',TO_DATE('2023-08-06','YYYY-MM-DD'),324,16,50);
+  insert into blood_inv values(450,'B-','Amman',TO_DATE('2024-04-06','YYYY-MM-DD'),665,12,90);

@@ -1,0 +1,13 @@
+CREATE TABLE Donation (
+  Donor_ID NUMBER(7) REFERENCES Donor(Donor_ID),
+  Donation_ID NUMBER(7) CONSTRAINT donation_pk PRIMARY KEY,
+  Volume_donated NUMBER(10) NOT NULL,
+  Adverse_reaction VARCHAR2(100) NOT NULL,
+  Date_of_donation DATE
+);
+
+INSERT INTO Donation VALUES (222, 2224555, 15, 'fever', TO_DATE('2022-12-12', 'YYYY-MM-DD'));
+INSERT INTO Donation VALUES (324, 2226444, 13, 'NONE', TO_DATE('2022-12-23', 'YYYY-MM-DD'));
+INSERT INTO Donation VALUES (155, 1111432, 16, 'nausea', TO_DATE('2023-01-03', 'YYYY-MM-DD'));
+INSERT INTO Donation VALUES (455, 2222768, 14, 'lightheadness', TO_DATE('2023-01-12', 'YYYY-MM-DD'));
+INSERT INTO Donation VALUES (665, 4453667, 13, 'dizziness', TO_DATE('2023-02-11', 'YYYY-MM-DD'));

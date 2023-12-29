@@ -1,0 +1,13 @@
+create table distribution_management(
+  quantity number(5),
+  transport_details varchar2(150),
+  medical_facilities varchar2(100) CONSTRAINT medical_pk PRIMARY KEY,
+  destinantion varchar2(100) NOT NULL
+ );
+
+ insert into distribution_management VALUES(180,'Shipped on 05/04/2023 via courier service,tracking number 1234, stored at 2-8°C during transport','ABC Hospital','Amman');
+ insert into distribution_management VALUES(200,'Shipped on 03/04/2023 via air transportation,tracking number 7890, stored at -20°C during transport','RGHI Clinic','Irbid');
+ insert into distribution_management VALUES(100,'Shipped on 01/04/2023 via ground transportation,tracking number 7880, stored at room temperature during transport','MNO Clinic','Aqaba');
+ insert into distribution_management VALUES(150,'Shipped on 20/03/2023 via air transportation,tracking number 3456, stored at -80°C during transport','YZ Blood Bank','Irbid');
+ insert into distribution_management VALUES(60,'Shipped on 17/03/2023 via air transportation,tracking number 1237,stored at -70°C during transport ','STU Laboratory','Ajloun');
+/

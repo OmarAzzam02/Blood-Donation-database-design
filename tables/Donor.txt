@@ -1,0 +1,15 @@
+create table Donor (
+  Donor_ID NUMBER(7) CONSTRAINT donor_pk PRIMARY KEY,
+  Name VARCHAR2(20),
+  Address VARCHAR2(15),
+  PhoneNum NUMBER(19) NOT NULL,
+  BloodType VARCHAR2(3) NOT NULL, 
+  Email VARCHAR2(20), Birthdate date, weight NUMBER(3), height NUMBER(3),
+  MedicalCond Varchar2(30) 
+);
+
+INSERT INTO Donor VALUES (222, 'Ahmad ALAhmad', 'AMMAN', 78556378, 'O-', 'ahmadal@hotmail.com', TO_DATE('2005-05-12', 'YYYY-MM-DD'), 66, 180, 'NONE');
+INSERT INTO Donor VALUES (324, 'Doaa Mohammad', 'IRBID', 79986754, 'A-', 'doaa224@gmail.com', TO_DATE('1998-11-04', 'YYYY-MM-DD'),  50, 166, 'Diabetes');
+INSERT INTO Donor VALUES (155, 'Khaled Awad', 'AMMAN', 76443284, 'A+', 'khaledaw@gmail.com', TO_DATE('2003-02-15', 'YYYY-MM-DD'), 70, 178, 'NONE');
+INSERT INTO Donor VALUES (455, 'Ali Samer', 'ALZARQA', 76884927, 'AB+', 'alisam34@hotmail.com', TO_DATE('1993-06-08', 'YYYY-MM-DD'), 77, 180, 'Hypertension');
+INSERT INTO Donor VALUES (665, 'Amal Mahmoud', 'IRBID', 78665734, 'O+', 'amalhamed@gmail.com', TO_DATE('2000-08-22', 'YYYY-MM-DD'), 45, 160, 'Muscular dystrophy');

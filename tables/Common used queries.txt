@@ -1,0 +1,42 @@
+// If Donor  Entered Wrong birhtdate 
+
+update donor
+set birthdate = TO_DATE('2002-10-22','YYYY-MM-DD')
+where donor_id = 455;
+
+
+ // if Donor didnt Show up to the Donation Center 
+
+ DELETE FROM Scheduling
+WHERE Donor_ID = 222;
+
+
+
+ 
+
+ // View All Donations
+ 
+SELECT * 
+FROM Donation,Donor 
+where Donation.Donor_ID = Donor.Donor_ID;
+
+
+// obtains names and phone numbers of donors who have made donations within the specified time frame.
+
+ SELECT Name, PhoneNum
+FROM Donor
+WHERE Donor_ID IN (
+    SELECT Donor_ID
+    FROM Donation
+    WHERE Date_of_donation >= ADD_MONTHS(SYSDATE, -4)
+);
+
+// future donation
+
+SELECT d.Name, d.BloodType, s.Time_Slots AS Appointment_Date_Time
+FROM Donor d, Scheduling s
+WHERE d.Donor_ID = s.Donor_ID
+AND s.Staff_ID IS NOT NULL
+AND s.Time_Slots > SYSDATE;
+
+

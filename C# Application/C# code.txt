@@ -1,0 +1,183 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SQLite; //SQL Connector
+
+namespace StudentRegSys
+{
+    public partial class Form1 : Form
+    {
+        // creating DB variables
+        SQLiteConnection con = new SQLiteConnection("Data Source=Blood.db;");
+        SQLiteCommand cmd = new SQLiteCommand();
+        SQLiteDataAdapter da = new SQLiteDataAdapter();
+        DataSet ds = new DataSet();
+      
+      
+
+        public Form1()
+        {
+            InitializeComponent();
+
+        }
+
+
+        private void InsertButton_Click(object sender, EventArgs e)
+        {
+            // 1- Open the connection to DB
+            con.Open();
+            try
+            {
+
+                //cmd.Connection = con;
+
+                cmd.Connection = con;
+                cmd.CommandText = "Insert into Donor (Donor_ID, Name, Address, PhoneNum, BloodType, Email, Birthdate, Weight, Height, MedicalCond)" +
+                "values(@DonorID, @Dname, @DAddress, @DPhoneNum, @DBloodType, @DEmail, @DBirthdate, @DWeight, @DHeight, @DMed)";
+
+
+                DateTime selectedDate = BirthDate.SelectionStart;
+                string DBirthDate = selectedDate.ToString("yyyy-MM-dd");
+
+                string condition = "NONE";
+                // if  yes button is chedcked MedConditionTextBox Will Appear
+
+                if(YesButton.Checked)
+                condition = Contxt.Text;
+
+                string Blood = "";
+                Blood = BloodType.SelectedItem.ToString();
+                int ssn = int.Parse(SSNtxt.Text);
+                int h = int.Parse(HeightTxt.Text);
+                int w = int.Parse(Weighttxt.Text);
+                int num = int.Parse(Phonetxt.Text);
+
+                cmd.Parameters.AddWithValue("DonorID", ssn);
+                cmd.Parameters.AddWithValue("Dname", Nametxt.Text);
+                cmd.Parameters.AddWithValue("DAddress", Addresstxt.Text);
+                cmd.Parameters.AddWithValue("DPhoneNum", num);
+                cmd.Parameters.AddWithValue("DBloodType", Blood); // combo box 
+                cmd.Parameters.AddWithValue("DEmail", Emailtxt.Text);
+                cmd.Parameters.AddWithValue("DBirthdate", DBirthDate);
+
+                cmd.Parameters.AddWithValue("DWeight", w);
+                cmd.Parameters.AddWithValue("DHeight", h);
+                cmd.Parameters.AddWithValue("DMed", condition);
+
+                // 3- execute the command
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                    MessageBox.Show("Error .. Record Not Added");
+                else
+                    MessageBox.Show("Record Inserted Successfully");
+
+
+            }
+
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show(ex.Message, " ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // 4- close DB connection
+
+            finally
+            {
+                con.Close();
+
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+           Contxt.Hide();
+            ConDLabel.Hide();
+
+        }
+
+        private void BirthDate_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BloodType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void YesButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Contxt.Show();
+            ConDLabel.Show();
+
+
+        }
+
+        private void NoButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (NoButton.Checked)
+            {
+                Contxt.Hide();
+                ConDLabel.Hide();
+            }
+        }
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+
+        }
+
+        private void SearchBtn_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                con.Open();
+                string bloodtypecmd = "select * from Donor where BloodType = @type";
+                SQLiteCommand cmd = new SQLiteCommand(bloodtypecmd, con);
+                cmd.Parameters.AddWithValue("@type", SearchTxt.Text);
+                da = new SQLiteDataAdapter(cmd);
+
+                ds = new DataSet();
+                da.Fill(ds, "Donor");
+
+                if (ds.Tables["Donor"] != null && ds.Tables["Donor"].Rows.Count > 0)
+                {
+                    dataGridView1.DataSource = ds.Tables["Donor"].DefaultView;
+                }
+                else
+                {
+                    MessageBox.Show("No records found for the specified blood type.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+    }
+}

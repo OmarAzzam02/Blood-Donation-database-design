@@ -1,0 +1,3 @@
+create table feedback(
+rate number(5), comments varchar2(50));
+
