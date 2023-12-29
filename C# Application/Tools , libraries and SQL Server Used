@@ -1,0 +1,45 @@
+Tools , libraries and SQL Server USED:
+
+
+Tools/enviroment: 
+Visual Studio 2022 C# Windows Forms App (.NetFramwork) 4.7.2:
+
+
+   
+2-DB Browser For SQlite (sqlite-dll-win64-x64-3410200 must be downloaded) GUI to view the data base file
+"sqlite-dll-win64-x64-3410200"
+
+4-Library Used to connect C# with the SQlite Data base:
+"Using System.Data.SQlite"
+
+
+5-The Database File (Encrypted File) Can be only viewd using SQliteBrowser
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
